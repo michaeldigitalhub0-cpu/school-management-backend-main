@@ -47,7 +47,7 @@ const getAnnouncementAdmin = async (limit) => {
         JOIN users usr
         ON usr.user_id = ann.posted_by
         LIMIT ?;
-    `, [Number(limit)]);
+    `, [10]);
 
     return data;
 }
