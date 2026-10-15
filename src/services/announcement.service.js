@@ -1,6 +1,6 @@
 
 const connectionPool = require('../config/database');
-const {TypedParameter, TypedParameter, TypedParameter, TypedParameter} = require('mysql2');
+const {TypedParameter} = require('mysql2');
 const { NotFoundError, ValidationErrorHandler } = require('../middleware/errorHandler');
 const { getCurrentDay } = require('../utils/dateUtils');
 const { generateID } = require('../utils/idGenerator');
