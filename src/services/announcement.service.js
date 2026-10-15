@@ -54,6 +54,7 @@ const getAnnouncementAdmin = async (limit) => {
 }
 
 const getAnnouncementTeacher = async (teacher_id, limit) => {
+console.log(typeof limit)
 
     const [data] = await connectionPool.execute(`
         SELECT 
