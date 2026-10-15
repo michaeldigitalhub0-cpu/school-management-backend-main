@@ -1,5 +1,6 @@
 
 const connectionPool = require('../config/database');
+const {TypedParameter, TypedParameter, TypedParameter, TypedParameter} = require('mysql2');
 const { NotFoundError, ValidationErrorHandler } = require('../middleware/errorHandler');
 const { getCurrentDay } = require('../utils/dateUtils');
 const { generateID } = require('../utils/idGenerator');
@@ -31,7 +32,7 @@ const createAnouncement = async (user_id, announcement) => {
 }
 
 const getAnnouncementAdmin = async (limit) => {
-
+	console.log(typeof limit);
     const [data] = await connectionPool.execute(`
         SELECT 
             ann.announcement_id,
@@ -47,7 +48,7 @@ const getAnnouncementAdmin = async (limit) => {
         JOIN users usr
         ON usr.user_id = ann.posted_by
         LIMIT ?;
-    `, [limit]);
+    `, [TypedParameter.INT(limit)]);
 
     return data;
 }
@@ -70,7 +71,7 @@ const getAnnouncementTeacher = async (teacher_id, limit) => {
         ON usr.user_id = ann.posted_by
         WHERE ann.audience = 'teachers' OR audience = 'all' OR posted_by = ? 
         LIMIT ?;
-    `, [teacher_id, limit]);
+    `, [teacher_id, TypedParameter.INT(limit)]);
 
     return data;
 }
@@ -103,7 +104,7 @@ const getAnnouncementStudent = async (student_id, limit) => {   // only for the 
         JOIN users usr
         ON usr.user_id = ann.posted_by
         WHERE audience = 'students' AND posted_by = ? OR audience = 'all' LIMIT ?;
-    `, [form_teacher[0].form_teacher, limit]);
+    `, [form_teacher[0].form_teacher, TypedParameter.INT(limit)]);
 
     return data;
 }
