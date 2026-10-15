@@ -39,20 +39,20 @@ router.post(
 router.get('/admin/all', validateToken, roleCheck('admin'), async (req, res) => {
 
     const {limit} = req.query;
-    const data = await getAnnouncementAdmin(limit);
+    const data = await getAnnouncementAdmin(Number(limit));
     res.status(200).json({ success: true, data });
 });
 
 router.get('/teacher/all', validateToken, roleCheck('teacher'), async (req, res) => {
     
     const {limit} = req.query;
-    const data = await getAnnouncementTeacher(req.user.user_id, limit);
+    const data = await getAnnouncementTeacher(req.user.user_id, Number(limit));
     res.status(200).json({ success: true, data });
 });
 
 router.get('/student/all', validateToken, roleCheck('student'), async (req, res) => {
     const {limit} = req.query;
-    const data = await getAnnouncementStudent(req.user.user_id, limit);
+    const data = await getAnnouncementStudent(req.user.user_id, Number(limit));
     res.status(200).json({ success: true, data });
 });
 
