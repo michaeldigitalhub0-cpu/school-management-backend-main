@@ -47,12 +47,13 @@ const getAnnouncementAdmin = async (limit) => {
         JOIN users usr
         ON usr.user_id = ann.posted_by
         LIMIT ?;
-    `, [limit]);
+    `, [Number(limit)]);
 
     return data;
 }
 
 const getAnnouncementTeacher = async (teacher_id, limit) => {
+console.log(typeof limit)
 
     const [data] = await connectionPool.execute(`
         SELECT 
@@ -70,7 +71,7 @@ const getAnnouncementTeacher = async (teacher_id, limit) => {
         ON usr.user_id = ann.posted_by
         WHERE ann.audience = 'teachers' OR audience = 'all' OR posted_by = ? 
         LIMIT ?;
-    `, [teacher_id, limit]);
+    `, [teacher_id, Number(limit)]);
 
     return data;
 }
@@ -103,7 +104,7 @@ const getAnnouncementStudent = async (student_id, limit) => {   // only for the 
         JOIN users usr
         ON usr.user_id = ann.posted_by
         WHERE audience = 'students' AND posted_by = ? OR audience = 'all' LIMIT ?;
-    `, [form_teacher[0].form_teacher, limit]);
+    `, [form_teacher[0].form_teacher, Number(limit)]);
 
     return data;
 }
