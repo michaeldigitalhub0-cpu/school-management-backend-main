@@ -6,8 +6,8 @@
     "start": "node ./server.js",
     "server": "nodemon ./server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Michael Ugo",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.3",
